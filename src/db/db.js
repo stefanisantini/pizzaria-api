@@ -4,7 +4,7 @@ const db= mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    //password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
 
@@ -17,3 +17,5 @@ const db= mysql.createPool({
         console.error('Erro ao conectar ao banco de dados:', err);
     }
 })();
+
+export default db

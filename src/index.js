@@ -23,7 +23,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // import authRoutes from './routes/authRoutes.js';
-// import clienteRoutes from './routes/cliente.Routes.js';
+import usuarioRoutes from './routes/usuarioRoutes.js';
 // import produtoRoutes from './routes/produtoRoutes.js';
 // import pedidoRoutes from './routes/pedidoRoutes.js';
 
@@ -51,7 +51,7 @@ const corsOption = {
 
  const apiPrefix= '/api';
 
-//  app.use(`${apiPrefix}/cliente`, clienteRoutes);
+ app.use(`${apiPrefix}/usuario`, usuarioRoutes);
 //  app.use(`${apiPrefix}/login`, authRoutes);
 //  app.use(`${apiPrefix}/produto`, produtoRoutes);
 //  app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
