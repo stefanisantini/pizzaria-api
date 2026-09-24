@@ -2,16 +2,16 @@ import * as usuarioService from '../services/usuarioService.js';
 import Joi from 'joi';
  
 export const usuarioCreateSchema = Joi.object({
-    cpf: Joi.string().length(11).required(),
+    cpf: Joi.string().required().length(11),
     nome: Joi.string().required().max(100),
     endereco: Joi.string().required().max(100),
     bairro: Joi.string().allow('').max(30),
     cidade: Joi.string().allow('').max(30),
-    cep: Joi.string().required().max(8),
+    cep: Joi.string().required().length(8),
     telefone: Joi.string().required(),
     email: Joi.string().required().email().max(50),
     senha: Joi.string().required().max(100),
-    tipo: Joi.string().required().max(10),
+    tipo: Joi.string().required().max(10)
 });
  
 export const usuarioUpdateSchema = Joi.object({
