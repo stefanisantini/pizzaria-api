@@ -11,11 +11,11 @@ export const login = async (req, res) => {
         if(!usuario) {
             return res.status(401).json({message: 'Credencial Invalida'})
         }
-        const senhaValida = await bcrypt.compare(senha, cliente.senha);
+        const senhaValida = await bcrypt.compare(senha, usuario.senha);
         if(!senhaValida){
             return res.status(401).json({menssage: 'Credencial Invalida'});
         }
-        const payload = {cpf: cliente.cpf, email: cliente.email};
+        const payload = {cpf: usuario.cpf, email: usuario.email};
         const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'});
 
         res.json({message: 'Login bem-sucedido!', token: token});

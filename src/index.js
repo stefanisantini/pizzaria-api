@@ -22,10 +22,11 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// import authRoutes from './routes/authRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import usuarioRoutes from './routes/usuarioRoutes.js';
-// import produtoRoutes from './routes/produtoRoutes.js';
-// import pedidoRoutes from './routes/pedidoRoutes.js';
+import produtoRoutes from './routes/produtoRoutes.js';
+import pedidoRoutes from './routes/pedidoRoutes.js';
+import entregadorRoutes from './routes/entregadorRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,9 +53,9 @@ const corsOption = {
  const apiPrefix= '/api';
 
  app.use(`${apiPrefix}/usuario`, usuarioRoutes);
-//  app.use(`${apiPrefix}/login`, authRoutes);
-//  app.use(`${apiPrefix}/produto`, produtoRoutes);
-//  app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
+ app.use(`${apiPrefix}/login`, authRoutes);
+ app.use(`${apiPrefix}/produto`, produtoRoutes);
+ app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

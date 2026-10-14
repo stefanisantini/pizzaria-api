@@ -38,7 +38,7 @@ export const listarUsuario = async (req,res) => {
 
 export const adicionarUsuario = async (req, res) => {
     try {
-        const novoUsuario = await usuarioService.creat(req.body);
+        const novoUsuario = await usuarioService.create(req.body);
         res.status(201).json({message: 'Usuario adicionado com sucesso', data: novoUsuario});
         } catch (err) {
             console.error('Erro ao adicionar usuario:', err);
@@ -52,7 +52,7 @@ export const adicionarUsuario = async (req, res) => {
 export const atualizarUsuario = async (req, res) => {
     try {
         const {cpf}= req.params;
-        const update= await usuarioService.update(req.body);
+        const update= await usuarioService.update(cpf,req.body);
         if (!update){
             return res.status(404).json({erro: 'Usuario não encontrado'});
         }

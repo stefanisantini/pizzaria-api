@@ -5,7 +5,7 @@ export const produtoCreateSchema = Joi.object({
    idProduto: Joi.number().required(),
    nomeProduto: Joi.string().allow('').max(30),
    descricao: Joi.string().required().max(100),
-   tipo: Joi.string().required().length(20),
+   tipo: Joi.string().required().max(20),
    valor: Joi.number().required(),
    imagem: Joi.string().allow('').max(200)
 });
@@ -13,7 +13,7 @@ export const produtoCreateSchema = Joi.object({
 export const produtoUpdateSchema = Joi.object({
     nomeProduto: Joi.string().allow().max(30),
     descricao: Joi.string().max(100),
-    tipo: Joi.string().allow().length(30),
+    tipo: Joi.string().allow().length(20),
     valor: Joi.number(),
     imagem: Joi.string().allow().max(200)
     }).min(1);
@@ -31,10 +31,10 @@ export const listarProduto = async (req,res) => {
 
 export const adicionarProduto = async (req, res) => {
     try {
-        const novoProduto = await produtoService.creat(req.body);
-        res.status(201).json({message: 'Usuario adicionado com sucesso', data: novoProduto});
+        const novoProduto = await produtoService.create(req.body);
+        res.status(201).json({message: 'Produto adicionado com sucesso', data: novoProduto});
         } catch (err) {
-            console.error('Erro ao adicionar usuario:', err);
+            console.error('Erro ao adicionar produto:', err);
             if (err.code === 'ER_DUP_ENTRY'){
                 return res.status(409).json({ erro: 'PRODUTO JÁ CADASTRADO.'});
             }
