@@ -1,29 +1,29 @@
 import db from '../db/db.js';
-export const findAll =  async(idProduto,nomeProduto,formaPagto) => {
+export const findAll =  async(idProduto,nomeProduto,tipo) => {
     let sql = 'SELECT * FROM produto';
     const conditions= [];
-    const valeus= [];
+    const values= [];
 
     if (idProduto) {
         conditions.push('idProduto = ?');
-        valeus.push(idProduto);
+        values.push(idProduto);
     }
 
     if (nomeProduto) {
         conditions.push('LOWER(nomeProduto) LIKE ?');
-        valeus.push(`%${nomeProduto.toLowerCase()}%`);
+        values.push(`%${nomeProduto.toLowerCase()}%`);
     }
 
-      if (formaPagto) {
-        conditions.push('LOWER(formaPagto) LIKE ?');
-        valeus.push(`%${formaPagto.toLowerCase()}%`)
+      if (tipo) {
+        conditions.push('LOWER(tipo) LIKE ?');
+        values.push(`%${tipo.toLowerCase()}%`)
     }
 
     if (conditions.length > 0) {
         sql += ' WHERE ' + conditions.join('AND');
     }
 
-    const [rows] = await db.query(sql, valeus);
+    const [rows] = await db.query(sql, values);
     return rows;
 };
 
@@ -34,10 +34,10 @@ export const create = async (newProduto) => {
     return newProduto;
 }
 
-export const update = async (idProduto, produtoData) => {
+export const update = async (produtoData,idProduto) => {
   
 
-    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?', [produtoData,idProduto]);
+    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?', [idProduto, produtoData]);
     return result.affectedRows > 0;
 };
     

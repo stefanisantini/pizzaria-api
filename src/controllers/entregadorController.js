@@ -26,15 +26,19 @@ export const listarEntregadores = async (req, res) => {
     }
 }
 
+
 export const adicionarEntregador = async (req, res) =>{
     try{
-        const novoEntregador = await entregadorService.criar(req.body);
-        res.status(201).json({message: 'Entregador adicionado com sucesso'});
+        const novoEntregador = await entregadorService.create(req.body);
+        res.status(201).json({message: 'Entregador adicionado com sucesso', data: novoEntregador});
     } catch(err){
         console.error('Erro ao adicionar entregador', err);
         res.status(500).json({message: 'Erro ao adicionar entregador'});
     }
-}
+};
+
+
+
 
 export const atualizarEntregador = async (req, res) => {
     try {

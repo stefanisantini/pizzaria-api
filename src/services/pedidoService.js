@@ -27,28 +27,21 @@ export const findAll =  async(cpf,idPedido,formaPagto) => {
     return rows;
 };
 
-export const create= async (pedidoData) => {
-
-
-    const newPedido = {
-
-    };
-
-    await db.query('INSERT INTO usuario SET ? ', newPedido);
-
-    delete newPedido.senha;
+export const create = async (newPedido) => {
+ 
+    await db.query('INSERT INTO pedido SET ?', newPedido);
+ 
     return newPedido;
+}
 
-};
-
-export const update = async (cpf, pedidoData) => {
+export const update = async (idPedido, pedidoData) => {
 
 
-    const [result] = await db.query('UPDATE usuario SET ? WHERE cpf = ?', [pedidoData,cpf]);
+    const [result] = await db.query('UPDATE pedido SET ? WHERE idPedido = ?', [idPedido, pedidoData]);
     return result.affectedRows > 0;
 }
     
-export const remove = async (cpf) => {
-    const [result] = await db.query('DELETE FROM usuario WHERE cpf = ?', [cpf]);
+export const remove = async (idPedido) => {
+    const [result] = await db.query('DELETE FROM pedido WHERE idPedido = ?', [idPedido]);
     return result.affectedRows > 0;
 };

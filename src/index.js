@@ -56,6 +56,7 @@ const corsOption = {
  app.use(`${apiPrefix}/login`, authRoutes);
  app.use(`${apiPrefix}/produto`, produtoRoutes);
  app.use(`${apiPrefix}/pedidos`, pedidoRoutes);
+ app.use(`${apiPrefix}/entregador`, entregadorRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

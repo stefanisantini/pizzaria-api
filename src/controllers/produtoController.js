@@ -13,15 +13,15 @@ export const produtoCreateSchema = Joi.object({
 export const produtoUpdateSchema = Joi.object({
     nomeProduto: Joi.string().allow().max(30),
     descricao: Joi.string().max(100),
-    tipo: Joi.string().allow().length(20),
+    tipo: Joi.string().allow().max(20),
     valor: Joi.number(),
     imagem: Joi.string().allow().max(200)
     }).min(1);
      
 export const listarProduto = async (req,res) => {
     try {
-        const {idProduto,nomeProduto,formaPagto} = req.query;
-        const produto = await produtoService.findAll(idProduto,nomeProduto,formaPagto)
+        const {idProduto,nomeProduto,tipo} = req.query;
+        const produto = await produtoService.findAll(idProduto,nomeProduto,tipo)
         res.json(produto);
     } catch (err) {
         console.error('Erro ao buscar o Produto', err)
@@ -42,19 +42,16 @@ export const adicionarProduto = async (req, res) => {
         }
 };
 
-export const atualizarProduto = async (req, res) => {
+export const atualizarProduto = async(req, res) => {
     try {
-        const {idProduto}= req.params;
-        const update= await produtoService.update(req.body);
-        if (!update){
-            return res.status(404).json({erro: 'Produto não encontrado'});
-        }
-        res.status(200).json({message: 'Produto atualizado com sucesso'});
+        const { idProduto } = req.params;
+        const update = await produtoService.update(idProduto, req.body);
+        res.json({message: 'Produto atualizado com sucesso', data: update});
     } catch (err) {
-    console.error('Erro ao atualizar o produto', err);
-    res.status(500).json({error: 'Erro ao atualizar o produto'});        
+        console.error('Erro ao atualizar produto: ', err);
+        res.status(500).json({ error: 'Erro ao atualizar produto'});
     }
-};
+}
 
 export const deletarProduto = async (req, res) => {
     try {
